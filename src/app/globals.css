@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/*
+  Design notes
+  - Paper: a cool white page with indigo "ink", like a ruled school diary.
+  - Status colours carry meaning only: red = overdue, amber = due within 7 days,
+    green = paid up / money received. Nothing else uses them.
+  - Numbers are the hero: big, heavy, tabular so columns of rupees line up.
+  - System fonts only (fast, offline, and Android ships Noto with Devanagari).
+*/
+
+@theme {
+  --color-paper: #f7f9fd;
+  --color-card: #ffffff;
+  --color-rule: #d5ddf0;
+  --color-ink: #1b2463;
+  --color-ink-soft: #4a5385;
+  --color-muted: #6b7194;
+  --color-text: #141a3d;
+  --color-over: #b3261e;
+  --color-over-bg: #fdecea;
+  --color-soon: #9a5b00;
+  --color-soon-bg: #fff4dc;
+  --color-paid: #1d7a3a;
+  --color-paid-bg: #e6f5ea;
+
+  --font-sans: "Noto Sans", "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* Leave room for the fixed bottom navigation and the phone's home bar */
+.pb-nav {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.sheet-enter {
+  animation: sheet-up 180ms ease-out;
+}
+
+/* Print: used by the monthly statement */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+  body {
+    background: #fff;
+    font-size: 12pt;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

@@ -1,0 +1,170 @@
+/**
+ * English UI text. To add a language, copy this file (for example to mr.ts),
+ * translate the values, and register it in ./index.ts.
+ * Keep words short and plain: this is used at a shop counter.
+ */
+export const en = {
+  appName: "Udhar Khata",
+  langName: "English",
+
+  // Login
+  loginTitle: "Enter password",
+  password: "Password",
+  loginButton: "Open",
+  wrongPassword: "Wrong password",
+  tooManyTries: "Too many tries. Wait {minutes} min.",
+  configMissing: "The app is not set up yet:",
+  logout: "Log out",
+
+  // Navigation
+  navCustomers: "Customers",
+  navDue: "Due soon",
+  navSettings: "Settings",
+
+  // Home
+  totalOutstanding: "Total to collect",
+  fromCustomers: "from {n} customers",
+  search: "Search name or phone",
+  sortBalance: "Highest balance",
+  sortDue: "Next due",
+  filterAll: "All",
+  filterDue7: "Due in 7 days",
+  filterOverdue: "Overdue",
+  noCustomers: "No customers yet",
+  addFirstCustomer: "Add your first customer, or load your diary from Settings.",
+  noMatches: "No one matches",
+  addCustomer: "Add customer",
+
+  // Status
+  overdue: "Overdue",
+  overdueAmount: "{amount} overdue",
+  dueToday: "Due today",
+  dueOn: "Due {date}",
+  dueInDays: "Due in {n} days",
+  paidUp: "All paid",
+  advance: "Advance",
+
+  // Customer form
+  name: "Name",
+  phone: "Mobile number",
+  dueDay: "Pays on day",
+  dueDayHelp: "Day of the month they usually pay (1 to 31)",
+  creditLimit: "Credit limit",
+  optional: "optional",
+  notes: "Notes",
+  reminderLanguage: "Reminder language",
+  openingBalance: "Opening balance",
+  openingBalanceHelp: "Amount already owed from the diary",
+  hideCustomer: "Hide this customer",
+  hiddenCustomers: "Hidden customers",
+  showCustomer: "Show again",
+  save: "Save",
+  cancel: "Cancel",
+  editCustomer: "Edit customer",
+  newCustomer: "New customer",
+
+  // Customer page
+  balance: "Balance",
+  nextDue: "Next due",
+  limitUsed: "Limit used",
+  gaveCredit: "Gave on credit",
+  receivedPayment: "Received payment",
+  history: "History",
+  noEntries: "No entries yet",
+  sendReminder: "Send reminder",
+  statement: "Statement",
+  call: "Call",
+  edited: "edited",
+
+  // Entry sheet
+  amount: "Amount",
+  note: "Items / note",
+  notePlaceholder: "rice 5kg, oil 1L",
+  date: "Date",
+  today: "Today",
+  newBalance: "New balance",
+  overLimit: "Over the credit limit of {limit}",
+  enterAmount: "Enter an amount",
+  editEntry: "Edit entry",
+  deleteEntry: "Delete",
+  confirmDeleteEntry: "Delete this entry?",
+  yesDelete: "Yes, delete",
+  deleted: "Entry deleted",
+  undo: "Undo",
+  saved: "Saved",
+
+  // Statement
+  statementTitle: "Statement",
+  month: "Month",
+  openingBal: "Opening balance",
+  closingBal: "Closing balance",
+  totalCredit: "Given on credit",
+  totalPaid: "Payments received",
+  details: "Details",
+  credit: "Credit",
+  payment: "Payment",
+  print: "Print / Save PDF",
+  noEntriesMonth: "No entries this month",
+
+  // Due soon / reminders
+  dueTitle: "Due soon",
+  dueSubtitle: "Overdue and due in the next 7 days",
+  nothingDue: "Nobody is due in the next 7 days",
+  remind: "Remind",
+  reminded: "Reminded {when}",
+  openingWhatsApp: "Opening WhatsApp…",
+  noPhone: "No mobile number",
+
+  // Settings
+  settingsTitle: "Settings",
+  shop: "Shop",
+  shopName: "Shop name",
+  upiId: "UPI ID",
+  upiIdHelp: "Like shopname@okaxis. Used on the payment page.",
+  appLanguage: "App language",
+  templates: "Reminder messages",
+  templatesHelp: "You can use {name}, {amount}, {dueDate}, {shopName} and {upiLink}.",
+  templateFor: "Message in {lang}",
+  backups: "Backup and restore",
+  backupNow: "Back up now",
+  backupDone: "Backup saved",
+  lastBackups: "Saved backups (newest first)",
+  noBackups: "No backups yet",
+  exportJson: "Download full backup (JSON)",
+  exportCustomersCsv: "Download customers (CSV)",
+  exportEntriesCsv: "Download entries (CSV)",
+  restoreJson: "Restore from JSON backup",
+  restoreWarning: "This replaces ALL current data with the backup. A copy of the current data is saved first.",
+  restoreConfirm: "Replace all data with this backup?",
+  restoreDone: "Restored {customers} customers and {entries} entries",
+  importCsv: "Load diary balances (CSV)",
+  importCsvHelp: "Columns: name, phone, balance, dueDay. One row per customer.",
+  importDone: "Loaded {n} customers",
+  chooseFile: "Choose file",
+  upload: "Load",
+  remindersLog: "Recent reminders",
+
+  // Pay page
+  payTitle: "Pay {shop}",
+  amountDue: "Amount due",
+  hello: "Namaste {name}",
+  payWithUpi: "Pay with UPI",
+  scanToPay: "Or scan with any UPI app",
+  copy: "Copy",
+  copied: "Copied",
+  payAfterNote: "After paying, please show the confirmation at the shop.",
+  linkExpired: "This payment link has expired. Please ask the shop for a new one.",
+  upiNotSet: "The shop has not added a UPI ID yet.",
+
+  // Common
+  back: "Back",
+  loading: "Loading…",
+  errorGeneric: "Something went wrong. Please try again.",
+  confirm: "Confirm",
+  close: "Close",
+  required: "Required",
+  invalidPhone: "Enter a 10 digit mobile number",
+} as const;
+
+export type DictKey = keyof typeof en;
+export type Dict = Record<DictKey, string>;
