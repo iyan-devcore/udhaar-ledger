@@ -33,6 +33,7 @@ export const en = {
   noCustomers: "No customers yet",
   addFirstCustomer: "Add your first customer, or load your diary from Settings.",
   noMatches: "No one matches",
+  pageNotFound: "This page does not exist",
   addCustomer: "Add customer",
 
   // Status
@@ -107,6 +108,7 @@ export const en = {
   payment: "Payment",
   print: "Print / Save PDF",
   noEntriesMonth: "No entries this month",
+  printedOn: "Printed on",
 
   // Due soon / reminders
   dueTitle: "Due soon",

@@ -28,6 +28,7 @@ export const hi: Dict = {
   noCustomers: "अभी कोई ग्राहक नहीं",
   addFirstCustomer: "पहला ग्राहक जोड़ें, या सेटिंग से डायरी का हिसाब लोड करें।",
   noMatches: "कोई नहीं मिला",
+  pageNotFound: "यह पेज मौजूद नहीं है",
   addCustomer: "ग्राहक जोड़ें",
 
   overdue: "तारीख निकल गई",
@@ -97,6 +98,7 @@ export const hi: Dict = {
   payment: "जमा",
   print: "प्रिंट / PDF सेव",
   noEntriesMonth: "इस महीने कोई एंट्री नहीं",
+  printedOn: "प्रिंट की तारीख",
 
   dueTitle: "जल्द देय",
   dueSubtitle: "तारीख निकल गई और अगले 7 दिन में देय",
