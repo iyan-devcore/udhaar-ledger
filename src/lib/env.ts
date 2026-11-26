@@ -12,8 +12,8 @@ export const env = {
   passwordPlain: process.env.APP_PASSWORD ?? "",
   /** Secret used to sign the session cookie. At least 32 characters. */
   sessionSecret: process.env.SESSION_SECRET ?? "",
-  databasePath: path.resolve(process.env.DATABASE_PATH ?? "./data/ledger.db"),
-  backupDir: path.resolve(process.env.BACKUP_DIR ?? "./data/backups"),
+  databasePath: path.resolve(/*turbopackIgnore: true*/ process.env.DATABASE_PATH ?? "./data/ledger.db"),
+  backupDir: path.resolve(/*turbopackIgnore: true*/ process.env.BACKUP_DIR ?? "./data/backups"),
   /** Number of nightly backups to keep. */
   backupKeep: Number(process.env.BACKUP_KEEP ?? 14),
   /** Time zone used for "today", due dates and backup names. */

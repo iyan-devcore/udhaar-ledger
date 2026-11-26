@@ -136,6 +136,7 @@ function FileForm({
   help,
   confirm,
   okText,
+  extra,
 }: {
   action: (prev: SimpleState, fd: FormData) => Promise<SimpleState>;
   accept: string;
@@ -143,6 +144,7 @@ function FileForm({
   help: string;
   confirm?: string;
   okText: (state: SimpleState) => string;
+  extra?: React.ReactNode;
 }) {
   const { t } = useI18n();
   const [state, formAction, pending] = useActionState<SimpleState, FormData>(action, {});
@@ -154,6 +156,7 @@ function FileForm({
     <form ref={formRef} action={formAction} className="flex flex-col gap-2 rounded-xl border border-rule bg-paper p-3">
       <p className="text-base font-semibold text-text">{label}</p>
       <p className="text-sm text-muted">{help}</p>
+      {extra}
       <label className="flex h-12 cursor-pointer items-center gap-2 rounded-xl border-2 border-dashed border-ink/30 bg-card px-3 text-base text-ink">
         <IconUpload size={20} />
         <span className="truncate">{fileName || t.chooseFile}</span>
@@ -218,6 +221,11 @@ export function ImportCsvForm() {
       label={t.importCsv}
       help={t.importCsvHelp}
       okText={(s) => fill(t.importDone, { n: s.message ?? "0" })}
+      extra={
+        <a href="/diary-template.csv" download className="text-sm font-semibold text-ink underline underline-offset-2">
+          {t.sampleFile}
+        </a>
+      }
     />
   );
 }

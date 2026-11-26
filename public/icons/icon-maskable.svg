@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- full bleed for maskable icons; artwork kept inside the central safe zone -->
+  <rect width="512" height="512" fill="#1b2463"/>
+  <g transform="translate(76 76) scale(0.703)">
+    <path d="M120 404h272M120 446h272" stroke="#3d4a99" stroke-width="10" stroke-linecap="round"/>
+    <path d="M170 96h176M170 154h176M196 96c64 0 104 18 104 58s-40 62-104 62h-26l124 132"
+          fill="none" stroke="#ffffff" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

@@ -144,6 +144,7 @@ export const en = {
   importCsv: "Load diary balances (CSV)",
   importCsvHelp: "Columns: name, phone, balance, dueDay. One row per customer.",
   importDone: "Loaded {n} customers",
+  sampleFile: "Download a sample file",
   chooseFile: "Choose file",
   upload: "Load",
   remindersLog: "Recent reminders",

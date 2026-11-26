@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   applicationName: "Udhar Khata",
   appleWebApp: { capable: true, title: "Udhar Khata", statusBarStyle: "default" },
   icons: {
-    icon: [{ url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
     apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
   },
   robots: { index: false, follow: false },

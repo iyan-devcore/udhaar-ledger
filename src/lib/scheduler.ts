@@ -18,13 +18,13 @@ export function startScheduler(): void {
   if (g.__ledgerScheduler) return;
   g.__ledgerScheduler = true;
 
-  const dir = path.resolve(process.env.BACKUP_DIR ?? "./data/backups");
+  const dir = path.resolve(/*turbopackIgnore: true*/ process.env.BACKUP_DIR ?? "./data/backups");
   const keep = Number(process.env.BACKUP_KEEP ?? 14);
   const timeZone = process.env.APP_TIMEZONE ?? "Asia/Kolkata";
 
   const tick = async () => {
     try {
-      g.__ledgerDb ??= openDatabase(path.resolve(process.env.DATABASE_PATH ?? "./data/ledger.db"));
+      g.__ledgerDb ??= openDatabase(path.resolve(/*turbopackIgnore: true*/ process.env.DATABASE_PATH ?? "./data/ledger.db"));
       const made = await ensureNightlyBackup(g.__ledgerDb.$client, { dir, keep, timeZone });
       if (made) console.log(`[backup] saved ${made}`);
       createRepo(g.__ledgerDb).deleteExpiredPayTokens();

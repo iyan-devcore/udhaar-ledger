@@ -132,6 +132,7 @@ export const hi: Dict = {
   importCsv: "डायरी का हिसाब लोड करें (CSV)",
   importCsvHelp: "कॉलम: name, phone, balance, dueDay। हर ग्राहक की एक लाइन।",
   importDone: "{n} ग्राहक लोड हुए",
+  sampleFile: "नमूना फ़ाइल डाउनलोड करें",
   chooseFile: "फ़ाइल चुनें",
   upload: "लोड करें",
   remindersLog: "हाल में याद दिलाया",

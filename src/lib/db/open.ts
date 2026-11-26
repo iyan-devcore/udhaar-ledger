@@ -7,7 +7,7 @@ import * as schema from "./schema";
 
 export type DB = BetterSQLite3Database<typeof schema> & { $client: Database.Database };
 
-export const MIGRATIONS_DIR = path.resolve(process.cwd(), "drizzle");
+export const MIGRATIONS_DIR = path.resolve(/*turbopackIgnore: true*/ process.cwd(), "drizzle");
 
 /**
  * Opens (and creates if needed) a SQLite database and applies migrations.
