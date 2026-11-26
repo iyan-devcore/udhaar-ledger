@@ -2,6 +2,9 @@
 # which must be a persistent volume (Fly.io volume, Render disk, or a host folder).
 FROM node:22-slim AS build
 WORKDIR /app
+# better-sqlite3 compiles a native module during npm ci, which needs these.
+RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ \
+    && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
