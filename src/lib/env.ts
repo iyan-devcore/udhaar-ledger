@@ -19,7 +19,8 @@ export const env = {
   /** Time zone used for "today", due dates and backup names. */
   timeZone: process.env.APP_TIMEZONE ?? "Asia/Kolkata",
   /** Public URL of the app, used to build /pay links inside reminders. */
-  publicBaseUrl: (process.env.PUBLIC_BASE_URL ?? "").replace(/\/+$/, ""),
+  // Render sets RENDER_EXTERNAL_URL automatically.
+  publicBaseUrl: (process.env.PUBLIC_BASE_URL || process.env.RENDER_EXTERNAL_URL || "").replace(/\/+$/, ""),
   isProduction: process.env.NODE_ENV === "production",
 
   // ---- Phase 2 (not used in v1, no external calls are made) ----

@@ -1,0 +1,24 @@
+# Render Blueprint: one-tap deploy from the repo.
+# Free plan has no persistent disk, so data resets when the service restarts
+# or redeploys. Fine for a preview; for real use switch to a paid plan and
+# uncomment the disk below.
+services:
+  - type: web
+    name: udhar-ledger
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /login
+    envVars:
+      - key: APP_PASSWORD
+        sync: false # Render asks for it when you deploy
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: APP_TIMEZONE
+        value: Asia/Kolkata
+      - key: SEED_DEMO
+        value: "1" # load 5 demo customers when the database is empty; delete for real use
+    # disk:
+    #   name: data
+    #   mountPath: /data
+    #   sizeGB: 1

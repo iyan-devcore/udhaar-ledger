@@ -20,5 +20,9 @@ COPY --from=build /app/.next ./.next
 COPY --from=build /app/public ./public
 COPY --from=build /app/drizzle ./drizzle
 COPY --from=build /app/next.config.ts ./
+COPY --from=build /app/scripts ./scripts
+COPY --from=build /app/src ./src
+COPY --from=build /app/tsconfig.json ./
 EXPOSE 3000
-CMD ["npx", "next", "start", "-p", "3000"]
+# SEED_DEMO=1 loads demo data into an empty database (the seed refuses if data exists).
+CMD ["sh", "-c", "if [ \"$SEED_DEMO\" = \"1\" ]; then npx tsx scripts/seed.ts || true; fi; exec npx next start -p ${PORT:-3000}"]

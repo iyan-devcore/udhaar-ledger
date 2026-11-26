@@ -43,7 +43,7 @@ migrations run automatically.
 | Variable | Required | Default | Meaning |
 | --- | --- | --- | --- |
 | `APP_PASSWORD_HASH` | yes (production) | | Login password hash from `npm run hash-password` |
-| `APP_PASSWORD` | dev only | | Plain password, for local use instead of the hash |
+| `APP_PASSWORD` | no | | Plain password instead of the hash (fine for a preview; prefer the hash) |
 | `SESSION_SECRET` | yes | | Random string, 32+ characters. Changing it logs out every device |
 | `DATABASE_PATH` | no | `./data/ledger.db` | SQLite file. Must be on a persistent disk |
 | `BACKUP_DIR` | no | `./data/backups` | Folder for nightly copies |
@@ -51,6 +51,7 @@ migrations run automatically.
 | `APP_TIMEZONE` | no | `Asia/Kolkata` | Time zone for "today", due dates and backup names |
 | `PUBLIC_BASE_URL` | recommended | request host | Public address used in `/pay` links, e.g. `https://udhar.example.com` |
 | `DISABLE_BACKUP_SCHEDULER` | no | | Set to `1` to turn off the built-in nightly backup timer |
+| `SEED_DEMO` | no | | Docker image only: `1` loads demo data into an empty database at start |
 
 Phase 2 names are reserved and unused in v1: `WHATSAPP_CLOUD_TOKEN`,
 `WHATSAPP_PHONE_NUMBER_ID`, `WHATSAPP_TEMPLATE_NAME`, `REMINDER_DAYS_BEFORE`,
@@ -118,12 +119,19 @@ Add to `fly.toml`:
 
 Then `fly deploy`. Keep one machine (`fly scale count 1`).
 
-### Render
+### Render (works from a phone)
 
-Create a **Web Service** from the repo using the Dockerfile, add a
-**Persistent Disk** mounted at `/data`, and set the environment variables
-above (`DATABASE_PATH=/data/ledger.db`, `BACKUP_DIR=/data/backups` are already
-the image defaults). A paid instance is needed for disks.
+The repo includes `render.yaml`. Open
+`https://render.com/deploy?repo=<your repo URL>`, sign in, and Render asks for
+`APP_PASSWORD`. It generates `SESSION_SECRET`, builds the Dockerfile and gives
+you an `onrender.com` address (pay links use it automatically).
+
+- The **free plan has no disk**: data resets whenever the service restarts or
+  redeploys, and it sleeps after 15 minutes idle (the first visit then takes
+  about a minute). `SEED_DEMO=1` reloads the 5 demo customers each time.
+- **For real use:** switch to a paid instance, uncomment the `disk` block in
+  `render.yaml` (mounted at `/data`), delete `SEED_DEMO`, and replace
+  `APP_PASSWORD` with `APP_PASSWORD_HASH`.
 
 ## Backups and restores
 
