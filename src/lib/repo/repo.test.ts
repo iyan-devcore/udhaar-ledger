@@ -90,7 +90,7 @@ describe("repository", () => {
     expect(t1.length).toBeGreaterThanOrEqual(24);
     expect(repo.getOrCreatePayToken(id, 125000, now)).toBe(t1);
     expect(repo.getOrCreatePayToken(id, 99900, now)).not.toBe(t1);
-    expect(repo.resolvePayToken(t1, now)).toEqual({ customerName: "Ramesh Kumar", amount: 125000 });
+    expect(repo.resolvePayToken(t1, now)).toEqual({ customerName: "Ramesh Kumar", amount: 125000, language: "hi" });
     expect(repo.resolvePayToken(t1, new Date("2026-12-27T10:00:00Z"))).toBe("expired");
     expect(repo.resolvePayToken("nope", now)).toBeNull();
     expect(repo.resolvePayToken("A".repeat(24), now)).toBeNull();

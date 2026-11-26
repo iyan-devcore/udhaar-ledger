@@ -334,17 +334,17 @@ export function createRepo(db: DB) {
   }
 
   /** Looks up a pay token. Returns only what the public page may show. */
-  function resolvePayToken(token: string, now = new Date()): { customerName: string; amount: number } | null | "expired" {
+  function resolvePayToken(token: string, now = new Date()): { customerName: string; amount: number; language: string } | null | "expired" {
     if (!/^[A-Za-z0-9_-]{16,64}$/.test(token)) return null;
     const row = db
-      .select({ amount: payTokens.amount, expiresAt: payTokens.expiresAt, name: customers.name })
+      .select({ amount: payTokens.amount, expiresAt: payTokens.expiresAt, name: customers.name, language: customers.language })
       .from(payTokens)
       .innerJoin(customers, eq(customers.id, payTokens.customerId))
       .where(eq(payTokens.token, token))
       .get();
     if (!row) return null;
     if (row.expiresAt <= now.toISOString()) return "expired";
-    return { customerName: row.name, amount: row.amount };
+    return { customerName: row.name, amount: row.amount, language: row.language };
   }
 
   function deleteExpiredPayTokens(now = new Date()): number {

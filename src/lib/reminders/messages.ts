@@ -41,7 +41,8 @@ export type UpiParams = {
 /** upi://pay?pa=<vpa>&pn=<name>&am=<amount>&cu=INR&tn=<note> */
 export function buildUpiLink({ vpa, payeeName, amountPaise, note }: UpiParams): string {
   const parts = [
-    `pa=${encodeURIComponent(vpa.trim())}`,
+    // Keep "@" literal: some UPI apps do not decode %40 in the payee address.
+    `pa=${encodeURIComponent(vpa.trim()).replace(/%40/g, "@")}`,
     `pn=${encodeURIComponent(payeeName.trim())}`,
     `am=${paiseToDecimal(amountPaise)}`,
     "cu=INR",
@@ -58,4 +59,20 @@ export function isValidVpa(vpa: string): boolean {
 /** Only the first name is ever shown on the public pay page. */
 export function firstName(name: string): string {
   return name.trim().split(/\s+/)[0] ?? "";
+}
+
+/**
+ * Removes the sentence (or line) that contains {key}. Used when the shop has
+ * no UPI ID yet, so "You can pay here: {upiLink}" disappears cleanly.
+ */
+export function dropSentenceWith(template: string, key: string): string {
+  const marker = `{${key}}`;
+  if (!template.includes(marker)) return template;
+  return template
+    .split(/(?<=[.!?।\n])/)
+    .map((part) => (part.includes(marker) ? (part.endsWith("\n") ? "\n" : "") : part))
+    .join("")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
 }

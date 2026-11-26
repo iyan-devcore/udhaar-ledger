@@ -14,7 +14,7 @@ import {
 } from "./dates";
 import { computeBalance, computeOverdue, customerStatus, withRunningBalance, type BalanceEntry } from "./balance";
 import { formatPhone, normalizePhone, phoneForWhatsApp } from "./phone";
-import { buildUpiLink, buildWhatsAppLink, firstName, isValidVpa, renderTemplate, DEFAULT_TEMPLATES } from "./reminders/messages";
+import { buildUpiLink, buildWhatsAppLink, dropSentenceWith, firstName, isValidVpa, renderTemplate, DEFAULT_TEMPLATES } from "./reminders/messages";
 import { parseCsv, toCsv } from "./csv";
 
 describe("paise formatting", () => {
@@ -181,6 +181,14 @@ describe("WhatsApp message and UPI link builders", () => {
     }
   });
 
+  it("drops the pay-link sentence when there is no UPI ID", () => {
+    expect(renderTemplate(dropSentenceWith(DEFAULT_TEMPLATES.en, "upiLink"), { ...vars, upiLink: "" })).toBe(
+      "Namaste Ramesh, your balance at Sharma General Store is ₹1,250, due on 10 Dec.\nThank you!",
+    );
+    expect(dropSentenceWith(DEFAULT_TEMPLATES.hi, "upiLink")).not.toContain("{upiLink}");
+    expect(dropSentenceWith(DEFAULT_TEMPLATES.hi, "upiLink")).toContain("धन्यवाद");
+  });
+
   it("builds a wa.me link with an encoded message", () => {
     const link = buildWhatsAppLink("+919876543210", "Namaste Ramesh & family\n₹1,250?");
     expect(link).toBe("https://wa.me/919876543210?text=Namaste%20Ramesh%20%26%20family%0A%E2%82%B91%2C250%3F");
@@ -189,9 +197,9 @@ describe("WhatsApp message and UPI link builders", () => {
 
   it("builds a UPI link with amount in rupees", () => {
     expect(buildUpiLink({ vpa: "sharma@okaxis", payeeName: "Sharma Store", amountPaise: 125050, note: "Udhar Nov" })).toBe(
-      "upi://pay?pa=sharma%40okaxis&pn=Sharma%20Store&am=1250.50&cu=INR&tn=Udhar%20Nov",
+      "upi://pay?pa=sharma@okaxis&pn=Sharma%20Store&am=1250.50&cu=INR&tn=Udhar%20Nov",
     );
-    expect(buildUpiLink({ vpa: "a@b", payeeName: "S & S", amountPaise: 100 })).toBe("upi://pay?pa=a%40b&pn=S%20%26%20S&am=1.00&cu=INR");
+    expect(buildUpiLink({ vpa: "a@b", payeeName: "S & S", amountPaise: 100 })).toBe("upi://pay?pa=a@b&pn=S%20%26%20S&am=1.00&cu=INR");
   });
 
   it("validates UPI IDs and trims names", () => {
