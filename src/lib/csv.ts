@@ -48,8 +48,8 @@ export function parseCsv(text: string): string[][] {
 function escapeField(value: unknown): string {
   let s = value === null || value === undefined ? "" : String(value);
   // Stop spreadsheets from treating cell text as a formula.
-  // Plain numbers such as "-500.00" are left alone.
-  if (/^[=+\-@\t\r]/.test(s) && !/^-?\d+(\.\d+)?$/.test(s)) s = "'" + s;
+  // Plain numbers such as "-500.00" or "+919876543210" are left alone.
+  if (/^[=+\-@\t\r]/.test(s) && !/^[+-]?\d+(\.\d+)?$/.test(s)) s = "'" + s;
   return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
